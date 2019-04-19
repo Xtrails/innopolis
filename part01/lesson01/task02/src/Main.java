@@ -26,7 +26,7 @@ public class Main {
      * Вспомогательный класс
      *
      * @version   1.10 19.04.2019
-     * @author    Anisimov Pavel
+     * @author    Pavel Anisimov
      */
     private static class MyClass {
 
