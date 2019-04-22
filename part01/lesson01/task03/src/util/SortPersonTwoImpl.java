@@ -2,6 +2,13 @@ package util;
 
 import domain.Person;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * Класс SortPersonTwoImpl реализует интерфейс SortPerson
  *
@@ -18,6 +25,16 @@ public class SortPersonTwoImpl implements SortPerson {
      */
     @Override
     public Person[] sort(Person[] persons) {
-        return new Person[0];
+        Instant start = Instant.now();
+
+        List<Person> personList = new ArrayList();
+        for (Person person : persons)
+            personList.add(person);
+        Collections.sort(personList);
+
+        Instant end = Instant.now();
+        System.out.println("Время выполения сортировки через компоратор: " + Duration.between(start, end));
+
+        return personList.toArray(new Person[persons.length]);
     }
 }

@@ -1,11 +1,8 @@
 import domain.Person;
-import domain.Sex;
-
-import javax.jnlp.PersistenceService;
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import util.SortPerson;
+import util.SortPersonOneImpl;
+import util.SortPersonTwoImpl;
+import util.Util;
 
 /**
  * Задание 3. Дан массив объектов domain.Person. Класс domain.Person характеризуется полями
@@ -25,32 +22,15 @@ import java.util.UUID;
 public class Main {
 
     public static void main(String[] args) {
-        Person[] persons = createPersons(100);
-        for (Person person : persons) {
-            System.out.println(person.toString());
-        }
-    }
 
-    /**
-     * Создает массив объектов Person размером count
-     * @param count - размер массива
-     * @return - массив объектов Person размером count
-     */
-    private static Person[] createPersons(int count) {
-        if (count > 0) {
-            List<Person> list = new ArrayList<>();
-            for (int i = 0; i < count; i++) {
-                Person person = new Person();
-                SecureRandom rnd = new SecureRandom();
-                int age = rnd.nextInt(100);
-                person.setAge(age);
-                person.setName(UUID.randomUUID().toString());
-                person.setSex(rnd.nextBoolean()? Sex.MAN:Sex.WOMAN);
-                list.add(person);
-            }
-            Person[] persons = list.toArray(new Person[count]);
-            return persons;
-        }
-        return null;
+        Person[] persons = Util.createPersons(15000);
+        SortPerson sortPerson = new SortPersonOneImpl();
+        persons = sortPerson.sort(persons);
+//        Util.printArr(persons);
+
+        persons = Util.createPersons(15000);
+        sortPerson = new SortPersonTwoImpl();
+        persons = sortPerson.sort(persons);
+//        Util.printArr(persons);
     }
 }
