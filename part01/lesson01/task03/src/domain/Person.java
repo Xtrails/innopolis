@@ -20,6 +20,9 @@ public class Person {
     /** Имя - строка */
     private String name;
 
+    public Person() {
+    }
+
     /**
      * Конструктор
      * @param age - возраст
