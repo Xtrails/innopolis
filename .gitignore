@@ -1,4 +1,5 @@
 *.impl
 .idea/
 *.xml
-out/
+/out/
+.idea_modules/
