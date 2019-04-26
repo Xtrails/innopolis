@@ -18,7 +18,7 @@ public class Main {
         MathBox<Number> box = new MathBox<>(arr);
         System.out.println(box.toString());
 
-        Double sum = MathBox.summator(box.getList());
+        Double sum = MathBox.summator(box.getSet());
         System.out.println(sum);
 
         box.deleteIntVal(10);
@@ -42,6 +42,6 @@ public class Main {
 
 
         //Проверка по task03
-        MathBox<ObjectBox<Integer>> errorBox = new MathBox<>(box);
+        MathBox<Number> errorBox = new MathBox<>(new Object());
     }
 }

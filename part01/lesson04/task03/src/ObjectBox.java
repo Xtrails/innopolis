@@ -9,10 +9,10 @@ import java.util.*;
  * @version   1.0 23.04.2019
  * @author    Pavel Anisimov
  */
-public class ObjectBox<T extends Number> extends Number {
+public class ObjectBox<T> {
 
     /** Коллекция */
-    private List<T> list = new ArrayList<>();
+    private Set<T> set = new HashSet<>();
 
     /** Пустой конструктор */
     public ObjectBox() {
@@ -23,24 +23,23 @@ public class ObjectBox<T extends Number> extends Number {
      * @param arr - массив
      */
     public ObjectBox(T[] arr) {
-        Set<T> set = new HashSet<>(Arrays.asList(arr));
-        list.addAll(set);
+        set = new HashSet<>(Arrays.asList(arr));
     }
 
     /**
-     * Получить лист
-     * @return - лист
+     * Получить сет
+     * @return - сет
      */
-    public List<T> getList() {
-        return list;
+    public Set<T> getSet() {
+        return set;
     }
 
     /**
-     * Изменить лист
-     * @param list - лист
+     * Изменить сет
+     * @param set - сет
      */
-    public void setList(List<T> list) {
-        this.list = list;
+    public void setSet(Set<T> set) {
+        this.set = set;
     }
 
     /**
@@ -48,7 +47,7 @@ public class ObjectBox<T extends Number> extends Number {
      * @param obj - добавляемый объект
      */
     public void addObject(T obj){
-        list.add(obj);
+        set.add(obj);
     }
 
     /**
@@ -56,8 +55,8 @@ public class ObjectBox<T extends Number> extends Number {
      * @param obj - удаляемый объект
      */
     public void deleteObject(T obj){
-        if(list.contains(obj)){
-            list.remove(obj);
+        if(set.contains(obj)){
+            set.remove(obj);
         }
     }
 
@@ -65,29 +64,9 @@ public class ObjectBox<T extends Number> extends Number {
      * Выводит содержимое коллекции в строку
      */
     public void dump(){
-        for (T t : list) {
+        for (T t : set) {
             System.out.print(t.toString() + " ");
         }
         System.out.println();
-    }
-
-    @Override
-    public int intValue() {
-        return 0;
-    }
-
-    @Override
-    public long longValue() {
-        return 0;
-    }
-
-    @Override
-    public float floatValue() {
-        return 0;
-    }
-
-    @Override
-    public double doubleValue() {
-        return 0;
     }
 }
