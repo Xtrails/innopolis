@@ -109,17 +109,17 @@ public class Pet implements Comparable<Pet> {
         Integer weight2 = o.getWeight();
         if (!owner1.equals(owner2)) {
             return owner1.compareTo(owner2);
-        } else if (name1 != name2) {
+        } else if (!name1.equals(name2)) {
             return name1.compareTo(name2);
-        } else if (weight2 != weight1) {
-            if (weight1 != weight2) {
+        } else if (!weight2.equals(weight1)) {
+            if (!weight1.equals(weight2)) {
                 if (weight1 < weight2) {
                     return 1;
                 } else if (weight1 > weight2) {
                     return -1;
                 }
             }
-        } else if (owner1.equals(owner2) && name1 == name2 && weight1 == weight2) {
+        } else if (owner1.equals(owner2) && name1.equals(name2) && weight1.equals(weight2)) {
             try {
                 throw new PetDuplicateException("При сортировке найдены дуюлирующиеся объекты Pet");
             } catch (PetDuplicateException e) {

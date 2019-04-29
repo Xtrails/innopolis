@@ -110,15 +110,15 @@ public class Person implements Comparable<Person>{
                 return 1;
             else if (sex2.equals(Sex.WOMAN))
                 return -1;
-        } else if (age1 != age2) {
-            if (age1 != age2) {
+        } else if (!age1.equals(age2)) {
+            if (!age1.equals(age2)) {
                 if (age1 < age2) {
                     return 1;
                 } else if (age1 > age2) {
                     return -1;
                 }
             }
-        } else if (name1 != name2){
+        } else if (!name1.equals(name2)){
             return name2.compareTo(name1);
         }
         return 0;

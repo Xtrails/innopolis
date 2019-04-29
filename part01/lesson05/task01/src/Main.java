@@ -2,6 +2,7 @@ import domain.Person;
 import domain.Pet;
 import domain.Sex;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,9 +46,13 @@ public class Main {
             System.out.println();
         }
 
-        UUID uuid = catalog.getCatalog().stream().map(Pet::getId).findFirst().get();
-        Pet updatePet = new Pet(uuid, "Koshka", new Person(14, Sex.MAN, "Dima"), 3);
-        catalog.editPetById(updatePet);
+
+        Optional<UUID> optUuid = catalog.getCatalog().stream().map(Pet::getId).findFirst();
+        UUID uuid = optUuid.isPresent() ? optUuid.get() : null;
+        if (uuid != null) {
+            Pet updatePet = new Pet(uuid, "Koshka", new Person(14, Sex.MAN, "Dima"), 3);
+            catalog.editPetById(updatePet);
+        }
 
         catalog.print();
     }
