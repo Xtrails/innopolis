@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.*;
 
 /**
@@ -16,7 +17,7 @@ public class FileUtill {
     private static List<String> words = new ArrayList<>();
 
     /**
-     * Получаем отсортированный по алфавиту лист не дублирующихся слов
+     * Получаем отсортированный по алфавиту лист не дублирующихся слов из любого текста
      */
     private static void getWords() {
         String str = "";
@@ -46,12 +47,21 @@ public class FileUtill {
      */
     public static void createDictonariesFile() {
         getWords();
-        try (FileOutputStream fos = new FileOutputStream(OUTPUT_TEXT_PATH)) {
-            for (String word : words) {
-                word += "\n";
-                byte[] buffer = word.getBytes();
+        String str = "";
+        for (String word : words) {
+            str += word + "\n";
+        }
+        writeFile(str.getBytes(),OUTPUT_TEXT_PATH);
+    }
+
+    /**
+     * Запись в файл массива байт
+     * @param buffer - массив байт
+     * @param path - путь до файла
+     */
+    private static void writeFile(byte[] buffer, String path){
+        try (FileOutputStream fos = new FileOutputStream(path)) {
                 fos.write(buffer, 0, buffer.length);
-            }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -75,7 +85,28 @@ public class FileUtill {
      * @param words - массив слов
      * @param probability - вероятность вхождения одного из слов массива в следующее предложение (1/probability)
      */
-    public static void getFiles(String path, int n, int size, String[] words, int probability){
+    public static void getFiles(String path, int n, int size, String[] words, int probability) {
+        for (int i = 0; i < n; i++) {
+            String fileName = createFileName(n, path);
 
+        }
+    }
+
+    /**
+     * Формирует имя файла например: /file01.txt
+     * @param n - номер файла
+     * @param path - путь
+     * @return - итоговое имя файла
+     */
+    private static String createFileName(int n, String path) {
+        if (path != null) {
+            if (n < 10) {
+                path += "/file0";
+            } else {
+                path += "/file";
+            }
+            return path + n + ".txt";
+        }
+        return null;
     }
 }

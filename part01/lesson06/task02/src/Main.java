@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Урок 6. Задание 2.
  *
@@ -19,7 +21,11 @@
  */
 public class Main {
     public static void main(String[] args) {
-        FileUtill.createDictonariesFile();
-
+//        for (int i = 0; i < 30; i++) {
+//            System.out.println(Utill.createRndWord(1,15));
+//        }
+        for (int i = 0; i < 10; i++) {
+            System.out.print(Utill.createRndParagraph(1, 15));
+        }
     }
 }
