@@ -46,12 +46,22 @@ public class FileUtill {
      */
     public static void createDictonariesFile() {
         getWords();
-        try (FileOutputStream fos = new FileOutputStream(OUTPUT_TEXT_PATH)) {
-            for (String word : words) {
-                word += "\n";
-                byte[] buffer = word.getBytes();
-                fos.write(buffer, 0, buffer.length);
-            }
+        String result = "";
+        for (String word : words) {
+            result += word + "\n";
+        }
+        byte[] buffer = result.getBytes();
+        writeFile(buffer, OUTPUT_TEXT_PATH);
+    }
+
+    /**
+     * Записать массив байт в файл
+     * @param buffer - массив байт
+     * @param path - путь до файла
+     */
+    public static void writeFile(byte[] buffer, String path) {
+        try (FileOutputStream fos = new FileOutputStream(path)) {
+            fos.write(buffer, 0, buffer.length);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
