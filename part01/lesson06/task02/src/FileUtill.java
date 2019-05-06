@@ -16,10 +16,25 @@ public class FileUtill {
 
     private static List<String> words = new ArrayList<>();
 
+    public static List<String> getWords() {
+        return words;
+    }
+
+    public static String[] getWords(int size) {
+        if (size <= words.size()) {
+            String[] arr = new String[size];
+            for (int i = 0; i < size; i++) {
+                arr[i] = words.get(i);
+            }
+            return arr;
+        }
+        return null;
+    }
+
     /**
      * Получаем отсортированный по алфавиту лист не дублирующихся слов из любого текста
      */
-    private static void getWords() {
+    private static void getWordsFromFile() {
         String str = "";
         try (FileInputStream fin = new FileInputStream(INPUT_TEXT_PATH)) {
             System.out.println("Размер считываемого файла: " + fin.available() + " байт(а)");
@@ -46,7 +61,7 @@ public class FileUtill {
      * Записываем полученные слова в файл
      */
     public static void createDictonariesFile() {
-        getWords();
+        getWordsFromFile();
         String str = "";
         for (String word : words) {
             str += word + "\n";

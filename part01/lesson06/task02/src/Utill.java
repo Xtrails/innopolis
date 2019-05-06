@@ -1,4 +1,7 @@
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
+
 /***
  * Вспомогательный класс
  *
@@ -6,6 +9,136 @@ import java.security.SecureRandom;
  * @author    Pavel Anisimov
  */
 public class Utill {
+
+    /**
+     * Создает случайный знак препинания
+     *
+     * @return - случайный знак препинания "!"/"?"/"."
+     */
+    public static String createRndMark() {
+        SecureRandom rnd = new SecureRandom();
+        int i = rnd.nextInt(3);
+        switch (i) {
+            case 0:
+                return "!";
+            case 1:
+                return "?";
+            case 2:
+                return ".";
+        }
+        return "";
+    }
+
+    /**
+     * Генерирует случаное предложение c определенным количеством слов
+     *
+     * @param min - минимальное количество слов в предложении
+     * @param max - максимальное количество слов в предложении
+     * @return - случаное предложение определенной длинны
+     */
+    public static String createRndSentence(int min, int max) {
+        if (max > 0 && max > min) {
+            int rndLength = createRndInt(min, max);
+            List<String> words = new ArrayList<>();
+            for (int i = 0; i < rndLength; i++) {
+                if (i == 0)
+                    words.add(firstUpperCase(createWord(1, 15)));
+                else
+                    words.add(createWord(1, 15));
+            }
+            if (rndLength > 1) {
+                int l = createRndInt(min, rndLength - 1);
+                words.add(l, ",");
+            }
+
+            words.add(createRndMark());
+            String result = "";
+            int size = words.size();
+            for (int i = 0; i < size; i++) {
+                if (i != 0 && i != size - 1 && !words.get(i).equals(",")) {
+                    result = result + " " + words.get(i);
+                } else {
+                    result += words.get(i);
+                }
+            }
+            return result;
+        }
+        return null;
+    }
+
+    /**
+     * Генерирует предложение определенной длинны length
+     *
+     * @param length - длинна предложения
+     * @return - случайное предложение длинной length
+     */
+    public static String createSentence(int length) {
+        if (length > 1) {
+            length--;
+            String sentence = "";
+            if (length <= 15) {
+                sentence = createWord(length);
+            }
+            if (length > 15 && length % 15 == 1) {
+                int count = length / 16;
+                int ost = length % 16;
+                if(ost==0){
+                    count--;
+                }
+                for (int i = 0; i < count; i++) {
+                    sentence += " " + createWord(14);
+                }
+                sentence += " " + createWord(7) + " " + createWord(8);
+            } else if (length > 15 && (length % 15 > 1 || length % 15==0)) {
+                int count = length / 16;
+                int ost = length % 16;
+                if (ost==0){
+                    count--;
+                    sentence += " " + createWord(7) + " " + createWord(8);
+                }
+                else
+                    sentence += " " + createWord(ost);
+                for (int i = 0; i < count; i++) {
+                    sentence += " " + createWord(15);
+                }
+            }
+            return sentence.trim() + createRndMark();
+        }
+        return null;
+    }
+
+    public static String createSentence(int length, String word) {
+        if (length > 1 && length!=word.length()) {
+            if (word.length() + 1 == length) {
+                return firstUpperCase(word + Utill.createRndMark());
+            }
+            if (word.length() + 2 < length) {
+                return firstUpperCase(word + " " + createSentence(length - word.length() - 1));
+            }
+            return firstUpperCase(createSentence(length));
+        }
+        return null;
+    }
+//    /**
+//     * Сгенерировать абзац с определенным количеством предложений
+//     *
+//     * @param min - минимальное количество предложений в абзаце
+//     * @param max - максимальное количество предложений в абзаце
+//     * @return - абзац
+//     */
+//    public static String createRndParagraph(int min, int max) {
+//        String result = "";
+//        if (max > 0 && max > min) {
+//            int rndLength = createRndInt(min, max);
+//            for (int i = 0; i < rndLength; i++) {
+//                result += createRndSentence(1, 15) + " ";
+//            }
+//            return result + "\n";
+//        }
+//        return null;
+//    }
+
+
     /**
      * Метод создания числа в диапозоне {min;max}
      *
@@ -71,20 +204,6 @@ public class Utill {
     }
 
     /**
-     * Генерирует предложение определенной длинны length
-     *
-     * @param length - длинна предложения
-     * @return - случайное предложение длинной length
-     */
-    public static String createSentence(int length) {
-        if(length>2){
-            String sentence = "";
-
-        }
-        return null;
-    }
-
-    /**
      * Получить случайное слово из массива
      *
      * @param strArr - массив слов
@@ -101,15 +220,34 @@ public class Utill {
 
     /**
      * Возвращает true с вероятностью probability
+     *
      * @param probability - вероятность
      * @return - true/false
      */
-    public static boolean isProbability(int probability){
-        if(probability>=1 && probability<=1000){
-            int rnd = createRndInt(1,1000);
-            if(rnd<=probability)
+    public static boolean isProbability(int probability) {
+        if (probability >= 1 && probability <= 1000) {
+            int rnd = createRndInt(1, 1000);
+            if (rnd <= probability)
                 return true;
         }
         return false;
     }
+
+    //        /**
+//         * Генерирует случайное слово определенной длинны
+//         * @param min - минимальная длинна слова
+//         * @param max - максимальная длинна слова
+//         * @return - случайное слово определенной длинны
+//         */
+//        public static String createRndWord(int min, int max) {
+//            if (max > 0 && max > min) {
+//                int rndLength = createRndInt(min, max);
+//                String word = "";
+//                for (int i = 0; i < rndLength; i++) {
+//                    word += (char) createRndInt(97, 122);
+//                }
+//                return word;
+//            }
+//            return null;
+//        }
 }
