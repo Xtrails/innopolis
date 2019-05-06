@@ -1,3 +1,5 @@
+import java.io.File;
+
 /**
  * Урок 6. Задание 2.
  *
@@ -19,6 +21,15 @@
  */
 public class Main {
     public static void main(String[] args) {
-        FileUtill.createDictonariesFile();
+//        FileUtill.createDictonariesFile();
+
+//        byte[] buffer ="".getBytes();
+//        FileUtill.writeFile(buffer,"test.txt");
+
+//        for (int i = 0; i < 30; i++) {
+//            System.out.println(Utill.createWord(1,15));
+//        }
+
+
     }
 }
