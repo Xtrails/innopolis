@@ -1,4 +1,4 @@
-import java.util.List;
+import java.io.File;
 
 /**
  * Урок 6. Задание 2.
@@ -21,11 +21,15 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
+//        FileUtill.createDictonariesFile();
+
+//        byte[] buffer ="".getBytes();
+//        FileUtill.writeFile(buffer,"test.txt");
+
 //        for (int i = 0; i < 30; i++) {
-//            System.out.println(Utill.createRndWord(1,15));
+//            System.out.println(Utill.createWord(1,15));
 //        }
-        for (int i = 0; i < 10; i++) {
-            System.out.print(Utill.createRndParagraph(1, 15));
-        }
+
+
     }
 }

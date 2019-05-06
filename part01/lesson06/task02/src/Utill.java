@@ -1,43 +1,23 @@
-import java.lang.reflect.Array;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-/**
+/***
  * Вспомогательный класс
  *
- * @version   1.0 30.04.2019
+ * @version   1.0 29.04.2019
  * @author    Pavel Anisimov
  */
 public class Utill {
-
     /**
-     * Создает случайный знак препинания
-     * @return - случайный знак препинания "!"/"?"/"."
+     * Метод создания числа в диапозоне {min;max}
+     *
+     * @param max - наибольшее число
+     * @param min - наименьшее число
+     * @return - число в диапозоне {min;max}
      */
-    public static String createRndMark(){
-        SecureRandom rnd = new SecureRandom();
-        int i = rnd.nextInt(3);
-        switch (i){
-            case 0: return "!";
-            case 1: return "?";
-            case 2: return ".";
-        }
-        return "";
-    }
-
-    /**
-     * Метод создания случайного числа в диапазоне {min;max}
-     * @param max - наибольшее число в массиве
-     * @param min - наименьшее число в массиве
-     * @return - чисел в диапозоне {min;max}
-     */
-    public static int createRndInt(int min, int max) {
-        if (max > 0 && max > min) {
+    private static int createRndInt(int min, int max) {
+        if (max > min) {
             SecureRandom rnd = new SecureRandom();
-            max++;
-            return rnd.nextInt(max - min) + min;
+            int result = rnd.nextInt(max - min) + min;
+            return result;
         } else if (min == max) {
             return min;
         }
@@ -45,84 +25,91 @@ public class Utill {
     }
 
     /**
-     * Генерирует случайное слово определенной длинны
+     * Создать слово длинной от min до max
+     *
      * @param min - минимальная длинна слова
      * @param max - максимальная длинна слова
-     * @return - случайное слово определенной длинны
+     * @return - слово
      */
-    public static String createRndWord(int min, int max) {
-        if (max > 0 && max > min) {
-            int rndLength = createRndInt(min, max);
-            String word = "";
-            for (int i = 0; i < rndLength; i++) {
-                word += (char) createRndInt(97, 122);
-            }
-            return word;
+    public static String createWord(int min, int max) {
+        String word = "";
+        if (min > 0 && max > min) {
+            int rndInt = createRndInt(min, max);
+            word = createWord(rndInt);
+        } else if (min == max) {
+            word = createWord(min);
         }
-        return null;
+        return word;
     }
 
     /**
-     * Генерирует случаное предложение c определенным количеством слов
-     * @param min - минимальное количество слов в предложении
-     * @param max - максимальное количество слов в предложении
-     * @return - случаное предложение определенной длинны
+     * Генерирует слово определенной длинны length
+     *
+     * @param length - длинна слова
+     * @return - случайное слово длинной length
      */
-    public static String createRndSentence(int min, int max) {
-        if (max > 0 && max > min) {
-            int rndLength = createRndInt(min, max);
-            List<String> words = new ArrayList<>();
-            for (int i = 0; i < rndLength; i++) {
-                if (i == 0)
-                    words.add(firstUpperCase(createRndWord(1, 15)));
-                else
-                    words.add(createRndWord(1, 15));
+    public static String createWord(int length) {
+        String word = "";
+        if (length > 0) {
+            for (int i = 0; i < length; i++) {
+                int rndInt = createRndInt(97, 122);
+                word += (char) rndInt;
             }
-            if(rndLength>1){
-                int l = createRndInt(min, rndLength-1);
-                words.add(l,",");
-            }
-
-            words.add(createRndMark());
-            String result = "";
-            int size = words.size();
-            for (int i = 0; i < size; i++) {
-                if(i!=0 && i!=size-1 && !words.get(i).equals(",")){
-                    result = result + " " + words.get(i);
-                } else {
-                    result += words.get(i);
-                }
-            }
-            return result;
         }
-        return null;
+        return word;
     }
 
     /**
-     * Сгенерировать абзац с определенным количеством предложений
-     * @param min - минимальное количество предложений в абзаце
-     * @param max - максимальное количество предложений в абзаце
-     * @return - абзац
+     * Сделать заглавной первую букву в слове
+     *
+     * @param word - слово в котором необходимо сделать первую букву заглавной
+     * @return - слово с первой заглавной буквой
      */
-    public static String createRndParagraph(int min, int max){
-        String result = "";
-        if (max > 0 && max > min) {
-            int rndLength = createRndInt(min, max);
-            for (int i = 0; i < rndLength; i++) {
-                result += createRndSentence(1,15) + " ";
-            }
-            return result + "\n";
-        }
-        return null;
-    }
-
-    /**
-     * Сделать первую букву в слове заглавной
-     * @param word - слово
-     * @return - слово с заглавной буквой
-     */
-    private static String firstUpperCase(String word){
-        if(word == null || word.isEmpty()) return "";
+    public static String firstUpperCase(String word) {
+        if (word == null || word.isEmpty()) return "";
         return word.substring(0, 1).toUpperCase() + word.substring(1);
+    }
+
+    /**
+     * Генерирует предложение определенной длинны length
+     *
+     * @param length - длинна предложения
+     * @return - случайное предложение длинной length
+     */
+    public static String createSentence(int length) {
+        if(length>2){
+            String sentence = "";
+
+        }
+        return null;
+    }
+
+    /**
+     * Получить случайное слово из массива
+     *
+     * @param strArr - массив слов
+     * @return - случайное слово
+     */
+    public static String getRandomWordFromArr(String[] strArr) {
+        if (strArr != null && strArr.length > 0) {
+            SecureRandom rnd = new SecureRandom();
+            int rndInt = rnd.nextInt(strArr.length);
+            return strArr[rndInt];
+        }
+        return null;
+    }
+
+    /**
+     * Возвращает true с вероятностью probability
+     * @param probability - вероятность
+     * @return - true/false
+     */
+    public static boolean isProbability(int probability){
+        if(probability>=1 && probability<=1000){
+            int rnd = createRndInt(1,1000);
+            if(rnd<=probability)
+                return true;
+        }
+        return false;
     }
 }
