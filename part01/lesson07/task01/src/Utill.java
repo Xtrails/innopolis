@@ -1,7 +1,7 @@
 import java.security.SecureRandom;
 
 /**
- * Вспомогательный класс
+ * Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ
  *
  * @version   1.0 7.05.2019
  * @author    Pavel Anisimov
@@ -9,11 +9,11 @@ import java.security.SecureRandom;
 public class Utill {
 
     /**
-     * Метод создания числа в диапозоне {min;max}
+     * РњРµС‚РѕРґ СЃРѕР·РґР°РЅРёСЏ С‡РёСЃР»Р° РІ РґРёР°РїРѕР·РѕРЅРµ {min;max}
      *
-     * @param max - наибольшее число
-     * @param min - наименьшее число
-     * @return - число в диапозоне {min;max}
+     * @param max - РЅР°РёР±РѕР»СЊС€РµРµ С‡РёСЃР»Рѕ
+     * @param min - РЅР°РёРјРµРЅСЊС€РµРµ С‡РёСЃР»Рѕ
+     * @return - С‡РёСЃР»Рѕ РІ РґРёР°РїРѕР·РѕРЅРµ {min;max}
      */
     private static int createRndInt(int min, int max) {
         if (max > min) {
@@ -27,11 +27,11 @@ public class Utill {
     }
 
     /**
-     * Создать массив случайных числе в диапозоне {min;max} размерностью size
-     * @param min - наибольшее число в массиве
-     * @param max - наименьшее число в массиве
-     * @param size - размерность массива
-     * @return - массив
+     * РЎРѕР·РґР°С‚СЊ РјР°СЃСЃРёРІ СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃР»Рµ РІ РґРёР°РїРѕР·РѕРЅРµ {min;max} СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊСЋ size
+     * @param min - РЅР°РёР±РѕР»СЊС€РµРµ С‡РёСЃР»Рѕ РІ РјР°СЃСЃРёРІРµ
+     * @param max - РЅР°РёРјРµРЅСЊС€РµРµ С‡РёСЃР»Рѕ РІ РјР°СЃСЃРёРІРµ
+     * @param size - СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°СЃСЃРёРІР°
+     * @return - РјР°СЃСЃРёРІ
      */
     public static int[] createRndIntArr(int min, int max, int size){
         int[] arr = new int[size];
