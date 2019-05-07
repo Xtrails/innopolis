@@ -52,21 +52,40 @@ public class Utill {
      * Гененрирует предложение длинной length со словом word
      *
      * @param length - длинна предложения
-     * @param word
+     * @param word - слово входящее в предложение
      * @return - случайное предложение длинной length со словом word
      */
     public static String createSentence(int length, String word) {
         if (length > 1) {
+            String sentence;
             if (word.length() + 1 == length) {
-                return firstUpperCase(word + Utill.createRndMark());
+                sentence = firstUpperCase(word + Utill.createRndMark());
             }
             if (word.length() + 2 < length && length != word.length()) {
-                return firstUpperCase(word + " " + createSentence(length - word.length() - 1));
+                sentence = firstUpperCase(word + " " + createSentence(length - word.length() - 1));
             } else {
-                return firstUpperCase(createSentence(length));
+                sentence = firstUpperCase(createSentence(length));
             }
+            if(!sentence.isEmpty() && sentence.split(" ").length>2)
+                sentence = addComma(sentence);
+            return sentence;
         }
         return null;
+    }
+
+    /**
+     * Гененрирует предложение длинной length с вероятностью probability вхождения слова word
+     *
+     * @param length - длинна предложения
+     * @param word - слово входящее в предложение
+     * @param probability - вероятность вхождения слова word  в предложение
+     * @return - случайное предложение длинной length со словом word
+     */
+    public static String createSentence(int length, String word, double probability) {
+        if(isProbability(probability)){
+            return createSentence(length,word);
+        }
+        return firstUpperCase(createSentence(length));
     }
 
     /**
@@ -111,24 +130,6 @@ public class Utill {
             return min;
         }
         return -1;
-    }
-
-    /**
-     * Создать слово длинной от min до max
-     *
-     * @param min - минимальная длинна слова
-     * @param max - максимальная длинна слова
-     * @return - слово
-     */
-    public static String createWord(int min, int max) {
-        String word = "";
-        if (min > 0 && max > min) {
-            int rndInt = createRndInt(min, max);
-            word = createWord(rndInt);
-        } else if (min == max) {
-            word = createWord(min);
-        }
-        return word;
     }
 
     /**
@@ -180,11 +181,14 @@ public class Utill {
      * @param probability - вероятность
      * @return - true/false
      */
-    public static boolean isProbability(int probability) {
-        if (probability >= 1 && probability <= 1000) {
-            int rnd = createRndInt(1, 1000);
-            if (rnd <= probability)
-                return true;
+    public static boolean isProbability(Double probability) {
+        if (probability > 0 && probability < 1) {
+            int value = (int) (probability * 1000);
+            if (value >= 1 && value <= 1000) {
+                int rnd = createRndInt(1, 1000);
+                if (rnd <= value)
+                    return true;
+            }
         }
         return false;
     }
@@ -207,79 +211,4 @@ public class Utill {
         }
         return "";
     }
-//        /**
-//         * Генерирует случайное слово определенной длинны
-//         * @param min - минимальная длинна слова
-//         * @param max - максимальная длинна слова
-//         * @return - случайное слово определенной длинны
-//         */
-//        public static String createRndWord(int min, int max) {
-//            if (max > 0 && max > min) {
-//                int rndLength = createRndInt(min, max);
-//                String word = "";
-//                for (int i = 0; i < rndLength; i++) {
-//                    word += (char) createRndInt(97, 122);
-//                }
-//                return word;
-//            }
-//            return null;
-//        }
-
-
-//    /**
-//     * Сгенерировать абзац с определенным количеством предложений
-//     *
-//     * @param min - минимальное количество предложений в абзаце
-//     * @param max - максимальное количество предложений в абзаце
-//     * @return - абзац
-//     */
-//    public static String createRndParagraph(int min, int max) {
-//        String result = "";
-//        if (max > 0 && max > min) {
-//            int rndLength = createRndInt(min, max);
-//            for (int i = 0; i < rndLength; i++) {
-//                result += createRndSentence(1, 15) + " ";
-//            }
-//            return result + "\n";
-//        }
-//        return null;
-//    }
-
-
-//    /**
-//     * Генерирует случаное предложение c определенным количеством слов
-//     *
-//     * @param min - минимальное количество слов в предложении
-//     * @param max - максимальное количество слов в предложении
-//     * @return - случаное предложение определенной длинны
-//     */
-//    public static String createRndSentence(int min, int max) {
-//        if (max > 0 && max > min) {
-//            int rndLength = createRndInt(min, max);
-//            List<String> words = new ArrayList<>();
-//            for (int i = 0; i < rndLength; i++) {
-//                if (i == 0)
-//                    words.add(firstUpperCase(createWord(1, 15)));
-//                else
-//                    words.add(createWord(1, 15));
-//            }
-//            if (rndLength > 1) {
-//                int l = createRndInt(min, rndLength - 1);
-//                words.add(l, ",");
-//            }
-//
-//            words.add(createRndMark());
-//            String result = "";
-//            int size = words.size();
-//            for (int i = 0; i < size; i++) {
-//                if (i != 0 && i != size - 1 && !words.get(i).equals(",")) {
-//                    result = result + " " + words.get(i);
-//                } else {
-//                    result += words.get(i);
-//                }
-//            }
-//            return result;
-//        }
-//        return null;
-//    }
 }

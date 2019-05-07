@@ -1,8 +1,3 @@
-import jdk.jshell.execution.Util;
-
-import java.io.File;
-import java.util.List;
-
 /**
  * Урок 6. Задание 2.
  *
@@ -24,29 +19,8 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-
-//        byte[] buffer ="".getBytes();
-//        FileUtill.writeFile(buffer,"test.txt");
-
-//        Тест создания рандомного слова
-//        for (int i = 0; i < 30; i++) {
-//            System.out.println(Utill.createWord(1,15));
-//        }
-
-//        Тест предложений с рандомным словом
-//        String sentence = "";
-//        int n = 100;
-//        String[] words = FileUtill.getWords(n);
-//        for (int i = 2; i < n; i++) {
-//            String word = Utill.getRandomWordFromArr(words);
-//            sentence = Utill.createSentence(i,word);
-//            sentence = Utill.addComma(sentence);
-//            System.out.print(sentence.length() == i ? "true" : "false");
-//            System.out.println(" " + sentence + " size=" + sentence.length());
-//        }
         FileUtill.createDictonariesFile();
         String[] words = FileUtill.getWords(1000);
-        FileUtill.getFiles("",5,100,words,0.5);
-
+        FileUtill.getFiles("",1,26000,words,0.9);
     }
 }
