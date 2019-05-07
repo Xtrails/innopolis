@@ -14,7 +14,7 @@ public class Utill {
      * @param length - длинна предложения
      * @return - случайное предложение длинной length
      */
-    public static String createSentence(int length) {
+    private static String createSentence(int length) {
         if (length > 1) {
             length--;
             String sentence = "";
@@ -55,7 +55,7 @@ public class Utill {
      * @param word - слово входящее в предложение
      * @return - случайное предложение длинной length со словом word
      */
-    public static String createSentence(int length, String word) {
+    private static String createSentence(int length, String word) {
         if (length > 1) {
             String sentence;
             if (word.length() + 1 == length) {
@@ -94,7 +94,7 @@ public class Utill {
      * @param sentence - предложение
      * @return - предложение с запятой
      */
-    public static String addComma(String sentence) {
+    private static String addComma(String sentence) {
         if (!sentence.isEmpty() && sentence.contains(" ")) {
             String[] words = sentence.split(" ");
             String result = "";
@@ -138,7 +138,7 @@ public class Utill {
      * @param length - длинна слова
      * @return - случайное слово длинной length
      */
-    public static String createWord(int length) {
+    private static String createWord(int length) {
         String word = "";
         if (length > 0) {
             for (int i = 0; i < length; i++) {
@@ -155,7 +155,7 @@ public class Utill {
      * @param word - слово в котором необходимо сделать первую букву заглавной
      * @return - слово с первой заглавной буквой
      */
-    public static String firstUpperCase(String word) {
+    private static String firstUpperCase(String word) {
         if (word == null || word.isEmpty()) return "";
         return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
@@ -181,7 +181,7 @@ public class Utill {
      * @param probability - вероятность
      * @return - true/false
      */
-    public static boolean isProbability(Double probability) {
+    private static boolean isProbability(Double probability) {
         if (probability > 0 && probability < 1) {
             int value = (int) (probability * 1000);
             if (value >= 1 && value <= 1000) {
@@ -198,7 +198,7 @@ public class Utill {
      *
      * @return - случайный знак препинания "!"/"?"/"."
      */
-    public static String createRndMark() {
+    private static String createRndMark() {
         SecureRandom rnd = new SecureRandom();
         int i = rnd.nextInt(3);
         switch (i) {
