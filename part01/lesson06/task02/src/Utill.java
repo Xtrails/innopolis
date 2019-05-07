@@ -1,7 +1,7 @@
 import java.security.SecureRandom;
 
 /***
- * Вспомогательный класс
+ * Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ
  *
  * @version   1.0 29.04.2019
  * @author    Pavel Anisimov
@@ -9,12 +9,12 @@ import java.security.SecureRandom;
 public class Utill {
 
     /**
-     * Генерирует предложение определенной длинны length
+     * Р“РµРЅРµСЂРёСЂСѓРµС‚ РїСЂРµРґР»РѕР¶РµРЅРёРµ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ РґР»РёРЅРЅС‹ length
      *
-     * @param length - длинна предложения
-     * @return - случайное предложение длинной length
+     * @param length - РґР»РёРЅРЅР° РїСЂРµРґР»РѕР¶РµРЅРёСЏ
+     * @return - СЃР»СѓС‡Р°Р№РЅРѕРµ РїСЂРµРґР»РѕР¶РµРЅРёРµ РґР»РёРЅРЅРѕР№ length
      */
-    public static String createSentence(int length) {
+    private static String createSentence(int length) {
         if (length > 1) {
             length--;
             String sentence = "";
@@ -49,13 +49,13 @@ public class Utill {
     }
 
     /**
-     * Гененрирует предложение длинной length со словом word
+     * Р“РµРЅРµРЅСЂРёСЂСѓРµС‚ РїСЂРµРґР»РѕР¶РµРЅРёРµ РґР»РёРЅРЅРѕР№ length СЃРѕ СЃР»РѕРІРѕРј word
      *
-     * @param length - длинна предложения
-     * @param word - слово входящее в предложение
-     * @return - случайное предложение длинной length со словом word
+     * @param length - РґР»РёРЅРЅР° РїСЂРµРґР»РѕР¶РµРЅРёСЏ
+     * @param word - СЃР»РѕРІРѕ РІС…РѕРґСЏС‰РµРµ РІ РїСЂРµРґР»РѕР¶РµРЅРёРµ
+     * @return - СЃР»СѓС‡Р°Р№РЅРѕРµ РїСЂРµРґР»РѕР¶РµРЅРёРµ РґР»РёРЅРЅРѕР№ length СЃРѕ СЃР»РѕРІРѕРј word
      */
-    public static String createSentence(int length, String word) {
+    private static String createSentence(int length, String word) {
         if (length > 1) {
             String sentence;
             if (word.length() + 1 == length) {
@@ -74,12 +74,12 @@ public class Utill {
     }
 
     /**
-     * Гененрирует предложение длинной length с вероятностью probability вхождения слова word
+     * Р“РµРЅРµРЅСЂРёСЂСѓРµС‚ РїСЂРµРґР»РѕР¶РµРЅРёРµ РґР»РёРЅРЅРѕР№ length СЃ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊСЋ probability РІС…РѕР¶РґРµРЅРёСЏ СЃР»РѕРІР° word
      *
-     * @param length - длинна предложения
-     * @param word - слово входящее в предложение
-     * @param probability - вероятность вхождения слова word  в предложение
-     * @return - случайное предложение длинной length со словом word
+     * @param length - РґР»РёРЅРЅР° РїСЂРµРґР»РѕР¶РµРЅРёСЏ
+     * @param word - СЃР»РѕРІРѕ РІС…РѕРґСЏС‰РµРµ РІ РїСЂРµРґР»РѕР¶РµРЅРёРµ
+     * @param probability - РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РІС…РѕР¶РґРµРЅРёСЏ СЃР»РѕРІР° word  РІ РїСЂРµРґР»РѕР¶РµРЅРёРµ
+     * @return - СЃР»СѓС‡Р°Р№РЅРѕРµ РїСЂРµРґР»РѕР¶РµРЅРёРµ РґР»РёРЅРЅРѕР№ length СЃРѕ СЃР»РѕРІРѕРј word
      */
     public static String createSentence(int length, String word, double probability) {
         if(isProbability(probability)){
@@ -89,12 +89,12 @@ public class Utill {
     }
 
     /**
-     * Вставляет запятую в предложение в котором более 2 слов
+     * Р’СЃС‚Р°РІР»СЏРµС‚ Р·Р°РїСЏС‚СѓСЋ РІ РїСЂРµРґР»РѕР¶РµРЅРёРµ РІ РєРѕС‚РѕСЂРѕРј Р±РѕР»РµРµ 2 СЃР»РѕРІ
      *
-     * @param sentence - предложение
-     * @return - предложение с запятой
+     * @param sentence - РїСЂРµРґР»РѕР¶РµРЅРёРµ
+     * @return - РїСЂРµРґР»РѕР¶РµРЅРёРµ СЃ Р·Р°РїСЏС‚РѕР№
      */
-    public static String addComma(String sentence) {
+    private static String addComma(String sentence) {
         if (!sentence.isEmpty() && sentence.contains(" ")) {
             String[] words = sentence.split(" ");
             String result = "";
@@ -115,11 +115,11 @@ public class Utill {
     }
 
     /**
-     * Метод создания числа в диапозоне {min;max}
+     * РњРµС‚РѕРґ СЃРѕР·РґР°РЅРёСЏ С‡РёСЃР»Р° РІ РґРёР°РїРѕР·РѕРЅРµ {min;max}
      *
-     * @param max - наибольшее число
-     * @param min - наименьшее число
-     * @return - число в диапозоне {min;max}
+     * @param max - РЅР°РёР±РѕР»СЊС€РµРµ С‡РёСЃР»Рѕ
+     * @param min - РЅР°РёРјРµРЅСЊС€РµРµ С‡РёСЃР»Рѕ
+     * @return - С‡РёСЃР»Рѕ РІ РґРёР°РїРѕР·РѕРЅРµ {min;max}
      */
     private static int createRndInt(int min, int max) {
         if (max > min) {
@@ -133,12 +133,12 @@ public class Utill {
     }
 
     /**
-     * Генерирует слово определенной длинны length
+     * Р“РµРЅРµСЂРёСЂСѓРµС‚ СЃР»РѕРІРѕ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ РґР»РёРЅРЅС‹ length
      *
-     * @param length - длинна слова
-     * @return - случайное слово длинной length
+     * @param length - РґР»РёРЅРЅР° СЃР»РѕРІР°
+     * @return - СЃР»СѓС‡Р°Р№РЅРѕРµ СЃР»РѕРІРѕ РґР»РёРЅРЅРѕР№ length
      */
-    public static String createWord(int length) {
+    private static String createWord(int length) {
         String word = "";
         if (length > 0) {
             for (int i = 0; i < length; i++) {
@@ -150,21 +150,21 @@ public class Utill {
     }
 
     /**
-     * Сделать заглавной первую букву в слове
+     * РЎРґРµР»Р°С‚СЊ Р·Р°РіР»Р°РІРЅРѕР№ РїРµСЂРІСѓСЋ Р±СѓРєРІСѓ РІ СЃР»РѕРІРµ
      *
-     * @param word - слово в котором необходимо сделать первую букву заглавной
-     * @return - слово с первой заглавной буквой
+     * @param word - СЃР»РѕРІРѕ РІ РєРѕС‚РѕСЂРѕРј РЅРµРѕР±С…РѕРґРёРјРѕ СЃРґРµР»Р°С‚СЊ РїРµСЂРІСѓСЋ Р±СѓРєРІСѓ Р·Р°РіР»Р°РІРЅРѕР№
+     * @return - СЃР»РѕРІРѕ СЃ РїРµСЂРІРѕР№ Р·Р°РіР»Р°РІРЅРѕР№ Р±СѓРєРІРѕР№
      */
-    public static String firstUpperCase(String word) {
+    private static String firstUpperCase(String word) {
         if (word == null || word.isEmpty()) return "";
         return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
 
     /**
-     * Получить случайное слово из массива
+     * РџРѕР»СѓС‡РёС‚СЊ СЃР»СѓС‡Р°Р№РЅРѕРµ СЃР»РѕРІРѕ РёР· РјР°СЃСЃРёРІР°
      *
-     * @param strArr - массив слов
-     * @return - случайное слово
+     * @param strArr - РјР°СЃСЃРёРІ СЃР»РѕРІ
+     * @return - СЃР»СѓС‡Р°Р№РЅРѕРµ СЃР»РѕРІРѕ
      */
     public static String getRandomWordFromArr(String[] strArr) {
         if (strArr != null && strArr.length > 0) {
@@ -176,12 +176,12 @@ public class Utill {
     }
 
     /**
-     * Возвращает true с вероятностью probability
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ true СЃ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊСЋ probability
      *
-     * @param probability - вероятность
+     * @param probability - РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ
      * @return - true/false
      */
-    public static boolean isProbability(Double probability) {
+    private static boolean isProbability(Double probability) {
         if (probability > 0 && probability < 1) {
             int value = (int) (probability * 1000);
             if (value >= 1 && value <= 1000) {
@@ -194,11 +194,11 @@ public class Utill {
     }
 
     /**
-     * Создает случайный знак препинания "!"/"?"/"."
+     * РЎРѕР·РґР°РµС‚ СЃР»СѓС‡Р°Р№РЅС‹Р№ Р·РЅР°Рє РїСЂРµРїРёРЅР°РЅРёСЏ "!"/"?"/"."
      *
-     * @return - случайный знак препинания "!"/"?"/"."
+     * @return - СЃР»СѓС‡Р°Р№РЅС‹Р№ Р·РЅР°Рє РїСЂРµРїРёРЅР°РЅРёСЏ "!"/"?"/"."
      */
-    public static String createRndMark() {
+    private static String createRndMark() {
         SecureRandom rnd = new SecureRandom();
         int i = rnd.nextInt(3);
         switch (i) {
