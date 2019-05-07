@@ -40,7 +40,7 @@ public class FileUtill {
             System.out.println("Размер считываемого файла: " + fin.available() + " байт(а)");
             int i = -1;
             while ((i = fin.read()) != -1) {
-                if ((i >= 65 && i <= 90) || (i >= 97 && i <= 122) || i == 32 || i == 39)
+                if ((i >= 65 && i <= 90) || (i >= 97 && i <= 122) || i == 32)
                     str += (char) i;
             }
         } catch (IOException ex) {
@@ -51,6 +51,9 @@ public class FileUtill {
             str = str.replace("  ", " ").toLowerCase();
             String[] arr = str.split(" ");
             Set<String> setWords = new HashSet<>(Arrays.asList(arr));
+            if(setWords.contains("")){
+                setWords.remove("");
+            }
             words = new ArrayList<>(setWords);
             Collections.sort(words);
             System.out.println("Размер списка слов: " + words.size());
@@ -100,11 +103,18 @@ public class FileUtill {
      * @param words - массив слов
      * @param probability - вероятность вхождения одного из слов массива в следующее предложение (1/probability)
      */
-    public static void getFiles(String path, int n, int size, String[] words, int probability) {
-        for (int i = 0; i < n; i++) {
-            String fileName = createFileName(n, path);
+    public static void getFiles(String path, int n, int size, String[] words, double probability) {
+        if (n > 0 && size > 0 && words != null && words.length > 0 && probability > 0 && probability <= 1) {
+            for (int i = 0; i < n; i++) {
+                String text = "";
+                String fileName = createFileName(n, path);
 
+
+
+                writeFile(text.getBytes(),path);
+            }
         }
+        System.out.println("Не верные входные параметры");
     }
 
     /**
@@ -114,11 +124,11 @@ public class FileUtill {
      * @return - итоговое имя файла
      */
     private static String createFileName(int n, String path) {
-        if (path != null) {
+        if (path != null ) {
             if (n < 10) {
-                path += "/file0";
+                path += "file0";
             } else {
-                path += "/file";
+                path += "file";
             }
             return path + n + ".txt";
         }
