@@ -1,3 +1,12 @@
+import javax.swing.text.html.parser.Entity;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.*;
+
+import static java.lang.String.format;
+
 /**
  * Урок 7.
  *
@@ -18,11 +27,35 @@
  * @author    Pavel Anisimov
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException{
+
         int n = 100;
-        int[] arr = new int[n];
-        arr = Utill.createRndIntArr(1,100,n);
+        int[] arr = Utill.createRndIntArr(1,15,n);
 
+        FactorialBox box = FactorialBox.getInstance();
 
+        ExecutorService threadPool = Executors.newFixedThreadPool(10);
+
+        long start = System.nanoTime();
+
+        List<Future<BigInteger>> futures = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            final int j = arr[i];
+            futures.add(
+                    CompletableFuture.supplyAsync(
+                            () -> Utill.getFactorial(j,box),
+                            threadPool
+                    ));
+        }
+
+//        BigInteger value = BigInteger.valueOf(0);
+//        for (Future<BigInteger> future : futures) {
+//            System.out.println(future.get());
+//        }
+
+        System.out.println(format("Executed by %d s",
+                (System.nanoTime() - start) / (1000_000_000)));
+
+        threadPool.shutdown();
     }
 }
