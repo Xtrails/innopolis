@@ -36,8 +36,6 @@ public class Main {
 
         ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
-        long start = System.nanoTime();
-
         List<Future<BigInteger>> futures = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             final int j = arr[i];
@@ -52,9 +50,6 @@ public class Main {
 //        for (Future<BigInteger> future : futures) {
 //            System.out.println(future.get());
 //        }
-
-        System.out.println(format("Executed by %d s",
-                (System.nanoTime() - start) / (1000_000_000)));
 
         threadPool.shutdown();
     }
