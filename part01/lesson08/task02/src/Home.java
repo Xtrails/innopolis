@@ -7,7 +7,9 @@
 import java.io.Serializable;
 
 public class Home implements Serializable {
+
     private String home;
+    private static final long serialVersionUID = -6281898335580667474L;
 
     public Home(String home) {
         this.home = home;
