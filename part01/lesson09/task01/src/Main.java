@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Урок 9
@@ -34,57 +34,46 @@ public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException, IOException {
 
-        Worker worker = new SomeClass();
-//        String methodCode = readConsole();
-        String methodCode = "123";
+        //Считываем код класса SomeClass
+        Path path = Paths.get("src/SomeClass.java");
+        String someClass = Files.readString(path, StandardCharsets.UTF_8);
+        String methodCode = readConsole();
+        someClass = someClass.substring(0, someClass.indexOf("doWork()") + 10) + methodCode + "}\n}\n";
 
         System.out.println("Выполняем doWork():");
+        Worker worker = new SomeClass();
         worker.doWork();
 
-        // Prepare source somehow.
-        String source = "import java.io.Serializable;\n" +
-                "\n" +
-                "public class SomeClass implements Worker, Serializable {\n" +
-                "\n" +
-                "    @Override\n" +
-                "    public void doWork() {\n" +
-                "        System.out.println(\"doWork 1.0\");\n" +
-                "    }\n" +
-                "}\n";
-
-        //https://stackoverflow.com/questions/2946338/how-do-i-programmatically-compile-and-instantiate-a-java-class
-        //Тайминг лекции 1:35:55
-
-        // Save source in .java file.
-        File root = new File("src/java"); // On Windows running on C:\, this is C:\java.
-        File sourceFile = new File(root, "SomeClass.java");
+        //Создаем обновленный java файл и компилируем его
+        File root = new File("src");
+        File sourceFile = new File(root, "/SomeClass.java");
         sourceFile.getParentFile().mkdirs();
-        Files.write(sourceFile.toPath(), source.getBytes(StandardCharsets.UTF_8));
-
-        // Compile source file.
+        Files.write(sourceFile.toPath(), someClass.getBytes(StandardCharsets.UTF_8));
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         compiler.run(null, null, null, sourceFile.getPath());
 
-        // Load and instantiate compiled class.
-        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] { root.toURI().toURL() });
-        Class<?> cls = Class.forName("java.SomeClass", true, classLoader); // Should print "hello".
-        Object instance = cls.newInstance(); // Should print "world".
-        System.out.println(instance); // Should print "test.Test@hashcode".
-
-        useCustomClassLoadre();
-
-        System.out.println("Выполняем обновленный doWork():");
-        worker.doWork();
+        //Загружаем и используем обновленный метод doWork()
+        useCustomClassLoader();
 
     }
 
-    private static  void useCustomClassLoadre() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    /**
+     * Вызов кастомного ClassLoader
+     * @throws ClassNotFoundException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    private static  void useCustomClassLoader() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         ClassLoader cl = new MyClassLoader();
-        Class<?> kindClass = cl.loadClass("");
+        Class<?> kindClass = cl.loadClass("SomeClass");
         Worker worker = (Worker) kindClass.newInstance();
         worker.doWork();
     }
 
+    /**
+     * Считывание с консоли до ввода пустой строки
+     * @return - текст введенный с консоли
+     */
     private static String readConsole(){
         String code = "";
         try (BufferedReader bf = new BufferedReader(new InputStreamReader(System.in))) {
