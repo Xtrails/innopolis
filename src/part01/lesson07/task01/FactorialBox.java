@@ -18,9 +18,9 @@ public class FactorialBox {
     }
 
     /**
-     * Поиск значения из memory по key
-     * @param key - ключ
-     * @return - значение
+     * РџРѕРёСЃРє Р·РЅР°С‡РµРЅРёСЏ РёР· memory РїРѕ key
+     * @param key - РєР»СЋС‡
+     * @return - Р·РЅР°С‡РµРЅРёРµ
      */
     public BigInteger findValue(Integer key){
         if (memory.containsKey(key)){
@@ -30,9 +30,9 @@ public class FactorialBox {
     }
 
     /**
-     * Добавить key и value в memory и обновить maxKey
-     * @param key - ключ
-     * @param value - значение
+     * Р”РѕР±Р°РІРёС‚СЊ key Рё value РІ memory Рё РѕР±РЅРѕРІРёС‚СЊ maxKey
+     * @param key - РєР»СЋС‡
+     * @param value - Р·РЅР°С‡РµРЅРёРµ
      */
     public void add(Integer key, BigInteger value) {
         memory.put(key, value);
@@ -41,11 +41,11 @@ public class FactorialBox {
     }
 
     /**
-     * Вывести в консоль все значения в memory и maxKey
+     * Р’С‹РІРµСЃС‚Рё РІ РєРѕРЅСЃРѕР»СЊ РІСЃРµ Р·РЅР°С‡РµРЅРёСЏ РІ memory Рё maxKey
      */
     public void print(){
         System.out.println();
-        System.out.println("Содержимое FactorialBox:");
+        System.out.println("РЎРѕРґРµСЂР¶РёРјРѕРµ FactorialBox:");
         for (Map.Entry<Integer, BigInteger> entry : memory.entrySet()) {
             System.out.println("map: key=" + entry.getKey() + " value="+entry.getValue());
         }

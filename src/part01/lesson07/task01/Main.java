@@ -30,7 +30,7 @@ public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException{
 
         int n = 100;
-        int[] arr = Utill.createRndIntArr(1,15,n);
+        int[] arr = NumberWorker.createRndIntArr(1,15,n);
 
         FactorialBox box = FactorialBox.getInstance();
 
@@ -41,7 +41,7 @@ public class Main {
             final int j = arr[i];
             futures.add(
                     CompletableFuture.supplyAsync(
-                            () -> Utill.getFactorial(j,box),
+                            () -> NumberWorker.getFactorial(j,box),
                             threadPool
                     ));
         }
@@ -51,6 +51,7 @@ public class Main {
 //            System.out.println(future.get());
 //        }
 
+        threadPool.awaitTermination(60, TimeUnit.MINUTES);
         threadPool.shutdown();
     }
 }

@@ -4,19 +4,19 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
- * Вспомогательный класс
+ * РљР»Р°СЃСЃ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ С‡РёСЃР»Р°РјРё
  *
  * @version   1.0 7.05.2019
  * @author    Pavel Anisimov
  */
-public class Utill {
+public class NumberWorker {
 
     /**
-     * Метод создания числа в диапозоне {min;max}
+     * РњРµС‚РѕРґ СЃРѕР·РґР°РЅРёСЏ С‡РёСЃР»Р° РІ РґРёР°РїРѕР·РѕРЅРµ {min;max}
      *
-     * @param max - наибольшее число
-     * @param min - наименьшее число
-     * @return - число в диапозоне {min;max}
+     * @param max - РЅР°РёР±РѕР»СЊС€РµРµ С‡РёСЃР»Рѕ
+     * @param min - РЅР°РёРјРµРЅСЊС€РµРµ С‡РёСЃР»Рѕ
+     * @return - С‡РёСЃР»Рѕ РІ РґРёР°РїРѕР·РѕРЅРµ {min;max}
      */
     private static int createRndInt(int min, int max) {
         if (max > min) {
@@ -30,12 +30,12 @@ public class Utill {
     }
 
     /**
-     * Создать массив случайных числе в диапозоне {min;max} размерностью size
+     * РЎРѕР·РґР°С‚СЊ РјР°СЃСЃРёРІ СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃР»Рµ РІ РґРёР°РїРѕР·РѕРЅРµ {min;max} СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊСЋ size
      *
-     * @param min  - наибольшее число в массиве
-     * @param max  - наименьшее число в массиве
-     * @param size - размерность массива
-     * @return - массив
+     * @param min  - РЅР°РёР±РѕР»СЊС€РµРµ С‡РёСЃР»Рѕ РІ РјР°СЃСЃРёРІРµ
+     * @param max  - РЅР°РёРјРµРЅСЊС€РµРµ С‡РёСЃР»Рѕ РІ РјР°СЃСЃРёРІРµ
+     * @param size - СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°СЃСЃРёРІР°
+     * @return - РјР°СЃСЃРёРІ
      */
     public static int[] createRndIntArr(int min, int max, int size) {
         int[] arr = new int[size];
@@ -46,11 +46,11 @@ public class Utill {
     }
 
     /**
-     * Получить факториал числа
+     * РџРѕР»СѓС‡РёС‚СЊ С„Р°РєС‚РѕСЂРёР°Р» С‡РёСЃР»Р°
      *
-     * @param value -число
-     * @param box   - сохраненные значения
-     * @return - факториал числа value
+     * @param value -С‡РёСЃР»Рѕ
+     * @param box   - СЃРѕС…СЂР°РЅРµРЅРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
+     * @return - С„Р°РєС‚РѕСЂРёР°Р» С‡РёСЃР»Р° value
      */
     public static BigInteger getFactorial(Integer value, FactorialBox box) {
         BigInteger result = BigInteger.valueOf(1);
@@ -58,23 +58,23 @@ public class Utill {
         if (value > 0) {
             if (value <= box.getMaxKey()) {
                 result = box.findValue(value);
-                System.out.println("Получаем факториал от " + value + ": " + result);
+                System.out.println("РџРѕР»СѓС‡Р°РµРј С„Р°РєС‚РѕСЂРёР°Р» РѕС‚ " + value + ": " + result);
             } else {
                 if (box.getMaxKey() > 0) {
                     start = box.getMaxKey();
                     result = box.findValue(start);
-                    System.out.println("Получаем факториал от " + start + ": " + result);
+                    System.out.println("РџРѕР»СѓС‡Р°РµРј С„Р°РєС‚РѕСЂРёР°Р» РѕС‚ " + start + ": " + result);
                 }
                 for (int i = start + 1; i <= value; i++) {
                     BigInteger tmp = result;
                     result = result.multiply(BigInteger.valueOf(i));
-                    System.out.println("Вычисляем:" + tmp + "*" + i + "=" + result);
+                    System.out.println("Р’С‹С‡РёСЃР»СЏРµРј:" + tmp + "*" + i + "=" + result);
                     if (!box.getMemory().containsKey(i)) {
                         box.add(i, result);
                     }
                 }
             }
-            System.out.println("Факториал числа " + value + ": " + result);
+            System.out.println("Р¤Р°РєС‚РѕСЂРёР°Р» С‡РёСЃР»Р° " + value + ": " + result);
             return result;
         }
         return null;

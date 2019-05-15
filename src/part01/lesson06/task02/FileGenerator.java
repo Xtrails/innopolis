@@ -10,8 +10,8 @@ import java.util.*;
  * @author    Pavel Anisimov
  */
 public class FileGenerator {
-    private static final String INPUT_TEXT_PATH = "input_text.txt";
-    private static final String OUTPUT_TEXT_PATH = "words.txt";
+    private static final String INPUT_TEXT_PATH = "src/part01/lesson06/task02/input_text.txt";
+    private static final String OUTPUT_TEXT_PATH = "src/part01/lesson06/task02/words.txt";
 
     /** Минимальная длинна предложения */
     private static final Integer MIN_LENGTH_SENTENCE = 2;
@@ -120,7 +120,7 @@ public class FileGenerator {
             while ((strLine = br.readLine()) != null){
                 str += strLine;
             }
-            str = str.replaceAll("[^A-Za-zА-Яа-я0-9]","");
+            str = str.replaceAll("[^A-Za-z ]","");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

@@ -12,21 +12,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Урок 9
+ * РЈСЂРѕРє 9
  *
- * Дан интерфейс
+ * Р”Р°РЅ РёРЅС‚РµСЂС„РµР№СЃ
  *
  * public interface Worker {
  *     void doWork();
  * }
  *
- * Необходимо написать программу, выполняющую следующее:
+ * РќРµРѕР±С…РѕРґРёРјРѕ РЅР°РїРёСЃР°С‚СЊ РїСЂРѕРіСЂР°РјРјСѓ, РІС‹РїРѕР»РЅСЏСЋС‰СѓСЋ СЃР»РµРґСѓСЋС‰РµРµ:
  *
- * Программа с консоли построчно считывает код метода doWork. Код не должен требовать импорта дополнительных классов.
- * После ввода пустой строки считывание прекращается и считанные строки добавляются в тело метода public void doWork() в файле SomeClass.java.
- * Файл SomeClass.java компилируется программой (в рантайме) в файл SomeClass.class.
- * Полученный файл подгружается в программу с помощью кастомного загрузчика
- * Метод, введенный с консоли, исполняется в рантайме (вызывается у экземпляра объекта подгруженного класса)
+ * РџСЂРѕРіСЂР°РјРјР° СЃ РєРѕРЅСЃРѕР»Рё РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃС‡РёС‚С‹РІР°РµС‚ РєРѕРґ РјРµС‚РѕРґР° doWork. РљРѕРґ РЅРµ РґРѕР»Р¶РµРЅ С‚СЂРµР±РѕРІР°С‚СЊ РёРјРїРѕСЂС‚Р° РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РєР»Р°СЃСЃРѕРІ.
+ * РџРѕСЃР»Рµ РІРІРѕРґР° РїСѓСЃС‚РѕР№ СЃС‚СЂРѕРєРё СЃС‡РёС‚С‹РІР°РЅРёРµ РїСЂРµРєСЂР°С‰Р°РµС‚СЃСЏ Рё СЃС‡РёС‚Р°РЅРЅС‹Рµ СЃС‚СЂРѕРєРё РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РІ С‚РµР»Рѕ РјРµС‚РѕРґР° public void doWork() РІ С„Р°Р№Р»Рµ SomeClass.java.
+ * Р¤Р°Р№Р» SomeClass.java РєРѕРјРїРёР»РёСЂСѓРµС‚СЃСЏ РїСЂРѕРіСЂР°РјРјРѕР№ (РІ СЂР°РЅС‚Р°Р№РјРµ) РІ С„Р°Р№Р» SomeClass.class.
+ * РџРѕР»СѓС‡РµРЅРЅС‹Р№ С„Р°Р№Р» РїРѕРґРіСЂСѓР¶Р°РµС‚СЃСЏ РІ РїСЂРѕРіСЂР°РјРјСѓ СЃ РїРѕРјРѕС‰СЊСЋ РєР°СЃС‚РѕРјРЅРѕРіРѕ Р·Р°РіСЂСѓР·С‡РёРєР°
+ * РњРµС‚РѕРґ, РІРІРµРґРµРЅРЅС‹Р№ СЃ РєРѕРЅСЃРѕР»Рё, РёСЃРїРѕР»РЅСЏРµС‚СЃСЏ РІ СЂР°РЅС‚Р°Р№РјРµ (РІС‹Р·С‹РІР°РµС‚СЃСЏ Сѓ СЌРєР·РµРјРїР»СЏСЂР° РѕР±СЉРµРєС‚Р° РїРѕРґРіСЂСѓР¶РµРЅРЅРѕРіРѕ РєР»Р°СЃСЃР°)
  *
  * @version   1.0 13.05.2019
  * @author    Pavel Anisimov
@@ -36,31 +36,31 @@ public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException, IOException {
 
-        //Считываем код класса SomeClass
-        Path path = Paths.get("src/SomeClass.java");
+        //РЎС‡РёС‚С‹РІР°РµРј РєРѕРґ РєР»Р°СЃСЃР° SomeClass
+        Path path = Paths.get("src/part01/lesson09/task01/SomeClass.java");
         String someClass = Files.readString(path, StandardCharsets.UTF_8);
         String methodCode = readConsole();
         someClass = someClass.substring(0, someClass.indexOf("doWork()") + 10) + methodCode + "}\n}\n";
 
-        System.out.println("Выполняем doWork():");
+        System.out.println("Р’С‹РїРѕР»РЅСЏРµРј doWork():");
         Worker worker = new SomeClass();
         worker.doWork();
 
-        //Создаем обновленный java файл и компилируем его
-        File root = new File("src");
+        //РЎРѕР·РґР°РµРј РѕР±РЅРѕРІР»РµРЅРЅС‹Р№ java С„Р°Р№Р» Рё РєРѕРјРїРёР»РёСЂСѓРµРј РµРіРѕ
+        File root = new File("src/part01/lesson09/task01");
         File sourceFile = new File(root, "/SomeClass.java");
         sourceFile.getParentFile().mkdirs();
         Files.write(sourceFile.toPath(), someClass.getBytes(StandardCharsets.UTF_8));
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         compiler.run(null, null, null, sourceFile.getPath());
 
-        //Загружаем и используем обновленный метод doWork()
+        //Р—Р°РіСЂСѓР¶Р°РµРј Рё РёСЃРїРѕР»СЊР·СѓРµРј РѕР±РЅРѕРІР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ doWork()
         useCustomClassLoader();
 
     }
 
     /**
-     * Вызов кастомного ClassLoader
+     * Р’С‹Р·РѕРІ РєР°СЃС‚РѕРјРЅРѕРіРѕ ClassLoader
      * @throws ClassNotFoundException
      * @throws IllegalAccessException
      * @throws InstantiationException
@@ -73,8 +73,8 @@ public class Main {
     }
 
     /**
-     * Считывание с консоли до ввода пустой строки
-     * @return - текст введенный с консоли
+     * РЎС‡РёС‚С‹РІР°РЅРёРµ СЃ РєРѕРЅСЃРѕР»Рё РґРѕ РІРІРѕРґР° РїСѓСЃС‚РѕР№ СЃС‚СЂРѕРєРё
+     * @return - С‚РµРєСЃС‚ РІРІРµРґРµРЅРЅС‹Р№ СЃ РєРѕРЅСЃРѕР»Рё
      */
     private static String readConsole(){
         String code = "";
