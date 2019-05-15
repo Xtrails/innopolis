@@ -21,9 +21,9 @@ import java.util.Scanner;
  * @version   1.0 14.05.2019
  * @author    Pavel Anisimov
  */
-public class Client {
+public class Client2 {
 
-    public static Integer CLIENT_PORT = 4990;
+    public static Integer CLIENT_PORT = 4991;
 
     public static void main(String[] args) throws IOException {
 
@@ -49,4 +49,6 @@ public class Client {
             e.printStackTrace();
         }
     }
+
+    //TODO: 1:15:44
 }

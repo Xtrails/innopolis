@@ -6,32 +6,62 @@ import part01.lesson10.task01.client.Client;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.SecureRandom;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 public class Server {
     public static final Integer SERVER_PORT = 4999; //ѕрослушиваемый порт
+    public static List<ServerListener> serverList = new LinkedList<>();
 
     public static void main(String[] args) throws IOException {
+        try (ServerSocket serverSocket = new ServerSocket(SERVER_PORT)) {
+            while (true) {
+                Socket socket = serverSocket.accept();
+                serverList.add(new ServerListener(socket));
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
-        Listener listenerThread = new Listener(SERVER_PORT);
-        listenerThread.start();
-
-        LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(10)); //„тобы успеть запустить клиент
-
-        try(Socket socket = new Socket("127.0.0.1", Client.CLIENT_PORT);
+        for (ServerListener serverListener : serverList) {
+            try(Socket socket = new Socket("127.0.0.1", serverListener.getUser().getPort());
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))){
             Scanner scanner = new Scanner(System.in);
             String message;
             while(!(message = scanner.nextLine()).isEmpty()){
-                bufferedWriter.write(message);
+                bufferedWriter.write(serverListener.getUser().getName() + ": " + message);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
         } catch (IOException e){
             e.printStackTrace();
         }
+        }
+    }
+
+
+
+    /**
+     * ћетод создани€ числа в диапозоне {min;max}
+     *
+     * @param max - наибольшее число
+     * @param min - наименьшее число
+     * @return - число в диапозоне {min;max}
+     */
+    private static int createRndInt(int min, int max) {
+        if (max > min) {
+            SecureRandom rnd = new SecureRandom();
+            int result = rnd.nextInt(max - min) + min;
+            return result;
+        } else if (min == max) {
+            return min;
+        }
+        return -1;
     }
 }

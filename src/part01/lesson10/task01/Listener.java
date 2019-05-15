@@ -6,22 +6,21 @@ import java.net.Socket;
 
 public class Listener extends Thread {
 
-    private int port;
+    private Socket socket;
 
-    public Listener(int port) {
-        this.port = port;
+    public Listener(Socket socket) {
+        this.socket = socket;
+        start();
     }
 
     @Override
     public void run() {
-        try(ServerSocket serverSocket = new ServerSocket(port);
-            Socket socket = serverSocket.accept();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))){
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
             String message;
-            while((message = reader.readLine())!=null){
+            while ((message = reader.readLine()) != null) {
                 System.out.println(message);
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
