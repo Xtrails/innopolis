@@ -1,6 +1,6 @@
 package part01.lesson10.task01.client;
 
-import part01.lesson10.task01.Listener;
+import part01.lesson10.task01.PortCreator;
 import part01.lesson10.task01.domain.User;
 import part01.lesson10.task01.server.Server;
 
@@ -12,30 +12,27 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * Урок 10. Задание 1.
+ * РљР»РёРµРЅС‚ С‡Р°С‚Р°
  *
- * Разработать приложение - многопользовательский чат, в котором участвует произвольное количество клиентов.
- * Каждый клиент после запуска отправляет свое имя серверу. После чего начинает отправлять ему сообщения.
- * Каждое сообщение сервер подписывает именем клиента и рассылает всем клиентам (broadcast).
- *
- * @version   1.0 14.05.2019
+ * @version   1.0 16.05.2019
  * @author    Pavel Anisimov
  */
 public class Client {
 
-    public static Integer CLIENT_PORT = 4990;
+    public static Integer CLIENT_PORT = PortCreator.createPort();
 
     public static void main(String[] args) throws IOException {
 
-        try(Socket socket = new Socket("127.0.0.1", Server.SERVER_PORT);
-            OutputStream os = socket.getOutputStream();
+        try(Socket socketServer = new Socket("127.0.0.1", Server.SERVER_PORT);
+            OutputStream os = socketServer.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os))){
+
+            new ClientListener(CLIENT_PORT);
 
             Scanner scanner = new Scanner(System.in);
             System.out.print("Create username: ");
             User user = new User(scanner.nextLine(),CLIENT_PORT);
-            os.write(user.toByteArray());
-            os.flush();
+            user.sendUser(os);
 
             String message;
             while(!(message = scanner.nextLine()).isEmpty()){
@@ -43,8 +40,6 @@ public class Client {
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
-
-            Listener listenerThread = new Listener(socket);
         } catch (IOException e){
             e.printStackTrace();
         }
