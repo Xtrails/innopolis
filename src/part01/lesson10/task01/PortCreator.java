@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Ãåíåğàòîğ ïîğòîâ
+ * Ğ“ĞµĞ½ĞµÑ€Ğ°Ñ‚Ğ¾Ñ€ Ğ¿Ğ¾Ñ€Ñ‚Ğ¾Ğ²
  *
  * @version   1.0 16.05.2019
  * @author    Pavel Anisimov
@@ -20,8 +20,8 @@ public class PortCreator {
 
 
     /**
-     * Ñîçäàåò ñëó÷àéíûé ïîğò â äèàïàçîíå {MIN_PORTS_VALUE; MAX_PORTS_VALUE}
-     * @return - ïîğò â äèàïàçîíå {MIN_PORTS_VALUE; MAX_PORTS_VALUE}
+     * Ğ¡Ğ¾Ğ·Ğ´Ğ°ĞµÑ‚ ÑĞ»ÑƒÑ‡Ğ°Ğ¹Ğ½Ñ‹Ğ¹ Ğ¿Ğ¾Ñ€Ñ‚ Ğ² Ğ´Ğ¸Ğ°Ğ¿Ğ°Ğ·Ğ¾Ğ½Ğµ {MIN_PORTS_VALUE; MAX_PORTS_VALUE}
+     * @return - Ğ¿Ğ¾Ñ€Ñ‚ Ğ² Ğ´Ğ¸Ğ°Ğ¿Ğ°Ğ·Ğ¾Ğ½Ğµ {MIN_PORTS_VALUE; MAX_PORTS_VALUE}
      */
     public static Integer createPort() {
         Integer port = createRndInt(MIN_PORTS_VALUE, MAX_PORTS_VALUE);
@@ -33,11 +33,11 @@ public class PortCreator {
     }
 
     /**
-     * Ìåòîä ñîçäàíèÿ ÷èñëà â äèàïîçîíå {min;max}
+     * ĞœĞµÑ‚Ğ¾Ğ´ ÑĞ¾Ğ·Ğ´Ğ°Ğ½Ğ¸Ñ Ñ‡Ğ¸ÑĞ»Ğ° Ğ² Ğ´Ğ¸Ğ°Ğ¿Ğ¾Ğ·Ğ¾Ğ½Ğµ {min;max}
      *
-     * @param max - íàèáîëüøåå ÷èñëî
-     * @param min - íàèìåíüøåå ÷èñëî
-     * @return - ÷èñëî â äèàïîçîíå {min;max}
+     * @param max - Ğ½Ğ°Ğ¸Ğ±Ğ¾Ğ»ÑŒÑˆĞµĞµ Ñ‡Ğ¸ÑĞ»Ğ¾
+     * @param min - Ğ½Ğ°Ğ¸Ğ¼ĞµĞ½ÑŒÑˆĞµĞµ Ñ‡Ğ¸ÑĞ»Ğ¾
+     * @return - Ñ‡Ğ¸ÑĞ»Ğ¾ Ğ² Ğ´Ğ¸Ğ°Ğ¿Ğ¾Ğ·Ğ¾Ğ½Ğµ {min;max}
      */
     private static int createRndInt(int min, int max) {
         if (max > min) {

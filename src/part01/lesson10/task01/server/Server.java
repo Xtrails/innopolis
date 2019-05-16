@@ -7,13 +7,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Сервер чата
+ * РЎРµСЂРІРµСЂ С‡Р°С‚Р°
  *
  * @version   1.0 16.05.2019
  * @author    Pavel Anisimov
  */
 public class Server {
-    public static final Integer SERVER_PORT = 5000; //Прослушиваемый порт
+    public static final Integer SERVER_PORT = 5000; //РџСЂРѕСЃР»СѓС€РёРІР°РµРјС‹Р№ РїРѕСЂС‚
     private static List<ServerListener> serverList = new LinkedList<>();
 
     public static void main(String[] args) throws IOException {
