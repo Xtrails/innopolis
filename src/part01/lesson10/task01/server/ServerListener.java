@@ -25,6 +25,10 @@ public class ServerListener extends Thread {
         start();
     }
 
+    /**
+     * Слушаем подключившегося клиента и рассылаем его сообщение всем остальным пользователям.
+     * Если приходит слово "quit" отключаем пользователя.
+     */
     @Override
     public void run() {
         try (InputStream is = socket.getInputStream();
@@ -53,6 +57,9 @@ public class ServerListener extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //TODO: выпиливать отключившегося пользователя из коллекции
+        //TODO: Добавить ЛС
     }
 
     /**

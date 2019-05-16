@@ -23,6 +23,9 @@ public class ClientListener extends Thread {
         start();
     }
 
+    /**
+     * Слушаем сервер в отдельном потоке, выпечатываем в консоль всё что от него приходит
+     */
     @Override
     public void run() {
         while (true) {
