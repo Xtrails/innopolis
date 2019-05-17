@@ -1,4 +1,4 @@
-package part01.lesson10.task01.client;
+package part01.lesson10.task02.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;

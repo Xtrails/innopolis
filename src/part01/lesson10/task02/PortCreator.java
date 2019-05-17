@@ -1,4 +1,4 @@
-package part01.lesson10.task01;
+package part01.lesson10.task02;
 
 import java.security.SecureRandom;
 import java.util.HashSet;

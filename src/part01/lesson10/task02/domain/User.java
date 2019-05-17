@@ -1,6 +1,4 @@
-package part01.lesson10.task01.domain;
-
-import part01.lesson10.task01.server.ServerListener;
+package part01.lesson10.task02.domain;
 
 import java.io.*;
 import java.net.Socket;

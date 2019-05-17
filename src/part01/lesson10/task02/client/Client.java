@@ -1,8 +1,8 @@
-package part01.lesson10.task01.client;
+package part01.lesson10.task02.client;
 
-import part01.lesson10.task01.PortCreator;
-import part01.lesson10.task01.domain.User;
-import part01.lesson10.task01.server.Server;
+import part01.lesson10.task02.PortCreator;
+import part01.lesson10.task02.domain.User;
+import part01.lesson10.task02.server.Server;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

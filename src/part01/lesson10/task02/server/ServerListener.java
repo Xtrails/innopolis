@@ -1,10 +1,9 @@
-package part01.lesson10.task01.server;
+package part01.lesson10.task02.server;
 
-import part01.lesson10.task01.domain.User;
+import part01.lesson10.task02.domain.User;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.List;
 import java.util.Map;
 
 /**
