@@ -3,6 +3,7 @@ package part01.lesson10.task01.domain;
 import part01.lesson10.task01.server.ServerListener;
 
 import java.io.*;
+import java.net.Socket;
 
 /**
  * Класс пользователя
@@ -12,9 +13,6 @@ import java.io.*;
  */
 
 public class User implements Serializable {
-
-    /** Listener клиента*/
-    private ServerListener listener;
 
     /** Имя пользователя */
     private String name;
@@ -52,6 +50,21 @@ public class User implements Serializable {
     public void sendUser(OutputStream os) throws IOException {
         os.write(this.toByteArray());
         os.flush();
+    }
+
+    /**
+     * Отправить сообщение
+     * @param message - сообщение
+     * @param userName - имя пользователя от которого отправляется сообщение
+     */
+    public void sendMessage(String message, String userName){
+            try (Socket socketUser = new Socket("127.0.0.1", port);
+                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(socketUser.getOutputStream()))) {
+                bufferedWriter.write(userName + ": " + message);
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+            } catch (IOException e) {
+            }
     }
 
     public String getName() {

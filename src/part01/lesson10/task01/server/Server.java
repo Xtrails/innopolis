@@ -3,8 +3,8 @@ package part01.lesson10.task01.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Сервер чата
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Server {
     public static final Integer SERVER_PORT = 5000; //Прослушиваемый порт
-    private static List<ServerListener> serverList = new LinkedList<>();
+    private static Map<String,ServerListener> users = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         System.out.println("Start server. Port " + SERVER_PORT);
@@ -22,14 +22,14 @@ public class Server {
         try {
             while (true) {
                 Socket socket = serverSocket.accept();
-                serverList.add(new ServerListener(socket));
+                new ServerListener(socket);
             }
         } finally {
             serverSocket.close();
         }
     }
 
-    public static List<ServerListener> getServerList() {
-        return serverList;
+    public static Map<String, ServerListener> getUsers() {
+        return users;
     }
 }

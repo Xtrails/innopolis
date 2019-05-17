@@ -30,7 +30,10 @@ public class Client {
             new ClientListener(CLIENT_PORT);
 
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Create username: ");
+            System.out.println("Команды:");
+            System.out.println("pm userName message - отправить личное сообщение message пользователю с ником userName");
+            System.out.println("quit - выйти из чата");
+            System.out.print("Введите имя пользователя: ");
             User user = new User(scanner.nextLine(),CLIENT_PORT);
             user.sendUser(os);
 
