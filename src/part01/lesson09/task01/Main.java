@@ -37,7 +37,7 @@ public class Main {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException, IOException {
 
         //Считываем код класса SomeClass
-        Path path = Paths.get("src/part01/lesson09/task01/SomeClass.java");
+        Path path = Paths.get("src/part01/lesson09/task02/SomeClass.java");
         String someClass = Files.readString(path, StandardCharsets.UTF_8);
         String methodCode = readConsole();
         someClass = someClass.substring(0, someClass.indexOf("doWork()") + 10) + methodCode + "}\n}\n";
@@ -47,7 +47,7 @@ public class Main {
         worker.doWork();
 
         //Создаем обновленный java файл и компилируем его
-        File root = new File("src/part01/lesson09/task01");
+        File root = new File("src/part01/lesson09/task02");
         File sourceFile = new File(root, "/SomeClass.java");
         sourceFile.getParentFile().mkdirs();
         Files.write(sourceFile.toPath(), someClass.getBytes(StandardCharsets.UTF_8));
