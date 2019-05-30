@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+
+  db:
+    image: postgres
+    container_name: db-education
+    restart: always
+    volumes:
+     - ~/home/user/rep/projects/innopolis/src/part01/lesson15/postgres/data/pg:/var/lib/postgresql/data
+     - /etc/localtime:/etc/localtime:ro
+    ports:
+     - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: admin

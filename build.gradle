@@ -1,0 +1,19 @@
+group = "part01.lesson15.task01"
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0' // Желаемая версия
+}

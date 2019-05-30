@@ -37,25 +37,25 @@ public class Main {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException, IOException {
 
         //Считываем код класса SomeClass
-        Path path = Paths.get("src/part01/lesson09/task02/SomeClass.java");
-        String someClass = Files.readString(path, StandardCharsets.UTF_8);
-        String methodCode = readConsole();
-        someClass = someClass.substring(0, someClass.indexOf("doWork()") + 10) + methodCode + "}\n}\n";
-
-        System.out.println("Выполняем doWork():");
-        Worker worker = new SomeClass();
-        worker.doWork();
-
-        //Создаем обновленный java файл и компилируем его
-        File root = new File("src/part01/lesson09/task02");
-        File sourceFile = new File(root, "/SomeClass.java");
-        sourceFile.getParentFile().mkdirs();
-        Files.write(sourceFile.toPath(), someClass.getBytes(StandardCharsets.UTF_8));
-        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        compiler.run(null, null, null, sourceFile.getPath());
-
-        //Загружаем и используем обновленный метод doWork()
-        useCustomClassLoader();
+//        Path path = Paths.get("src/part01/lesson09/task02/SomeClass.java");
+//        String someClass = Files.readString(path, StandardCharsets.UTF_8);
+//        String methodCode = readConsole();
+//        someClass = someClass.substring(0, someClass.indexOf("doWork()") + 10) + methodCode + "}\n}\n";
+//
+//        System.out.println("Выполняем doWork():");
+//        Worker worker = new SomeClass();
+//        worker.doWork();
+//
+//        //Создаем обновленный java файл и компилируем его
+//        File root = new File("src/part01/lesson09/task02");
+//        File sourceFile = new File(root, "/SomeClass.java");
+//        sourceFile.getParentFile().mkdirs();
+//        Files.write(sourceFile.toPath(), someClass.getBytes(StandardCharsets.UTF_8));
+//        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+//        compiler.run(null, null, null, sourceFile.getPath());
+//
+//        //Загружаем и используем обновленный метод doWork()
+//        useCustomClassLoader();
 
     }
 
