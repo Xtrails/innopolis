@@ -1,7 +1,7 @@
-create table user
+create table user_
 (
 	id serial not null
-		constraint user_pk
+		constraint user__pk
 			primary key,
 	name varchar(100),
 	birthday timestamp,
@@ -11,17 +11,17 @@ create table user
 	description varchar(255)
 );
 
-comment on table user is 'Пользователи';
+comment on table user_ is 'Пользователи';
 
-create table role
+create table role_
 (
 	id serial not null
-		constraint role_pk
+		constraint role__pk
 			primary key,
 	name varchar(100)
 );
 
-comment on table role is 'Роли пользователя';
+comment on table role_ is 'Роли пользователя';
 
 create table user_role
 (
@@ -30,17 +30,17 @@ create table user_role
 			primary key,
 	user_id int
 		constraint user_role_user_id_fk
-			references user,
+			references user_,
 	role_id int
 		constraint user_role_role_id_fk
-			references role
+			references role_
 );
 
 comment on table user_role is 'Связи пользователей и наименования их ролей';
 
-INSERT INTO "public"."role" ("id", "name") VALUES (1, 'Administration');
-INSERT INTO "public"."role" ("id", "name") VALUES (2, 'Clients');
-INSERT INTO "public"."role" ("id", "name") VALUES (3, 'Billing');
+INSERT INTO "public"."role_" ("id", "name") VALUES (1, 'Administration');
+INSERT INTO "public"."role_" ("id", "name") VALUES (2, 'Clients');
+INSERT INTO "public"."role_" ("id", "name") VALUES (3, 'Billing');
 
 
 
