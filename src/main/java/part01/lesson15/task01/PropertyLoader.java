@@ -1,18 +1,26 @@
 package part01.lesson15.task01;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * Загрузчик найтсроек бд
+ *
+ * @version   1.0 06.06.2019
+ * @author    Pavel Anisimov
+ */
 public class PropertyLoader {
 
-    private Logger log = org.slf4j.LoggerFactory.getLogger(PropertyLoader.class);
+    private Logger log = LoggerFactory.getLogger(PropertyLoader.class);
 
     private static PropertyLoader ourInstance = new PropertyLoader();
+
+    private String PATH = "/home/user/rep/projects/innopolis/src/main/java/part01/lesson15/task01/resources/database.properties";
 
     public static PropertyLoader getInstance() {
         return ourInstance;
@@ -21,18 +29,14 @@ public class PropertyLoader {
     public Properties properties = new Properties();
 
     private PropertyLoader() {
-        try (OutputStream output = new FileOutputStream("/home/user/rep/projects/innopolis/src/part01/lesson15/task01/resources/database.properties")) {
+        try (FileInputStream ip= new FileInputStream(PATH)) {
 
-            //Get the properties value
-            properties.getProperty("db.url");
-            properties.getProperty("db.user");
-            properties.getProperty("db.password");
-            properties.getProperty("db.driver");
+            properties.load(ip);
 
-            log.info("Init properties complete:");
-            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-                log.info(entry.getKey()+" : "+entry.getValue());
-            }
+            log.info("Init properties complete");
+//            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+//                log.info(entry.getKey()+" : "+entry.getValue());
+//            }
         } catch (IOException e) {
             log.error("Ошибка при получение Properties: " + e.getMessage());
         }

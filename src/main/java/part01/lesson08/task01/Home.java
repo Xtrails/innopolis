@@ -1,5 +1,5 @@
 package part01.lesson08.task01; /**
- * Сериализуемый класс
+ * РЎРµСЂРёР°Р»РёР·СѓРµРјС‹Р№ РєР»Р°СЃСЃ
  *
  * @version   1.0 13.05.2019
  * @author    Pavel Anisimov
