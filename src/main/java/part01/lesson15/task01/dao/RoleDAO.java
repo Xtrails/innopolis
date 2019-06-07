@@ -19,19 +19,11 @@ import java.util.UUID;
 public class RoleDAO {
     private static Logger log = LoggerFactory.getLogger(UserDAO.class);
 
-    private static Connection connection;
+    private static Connection connection = ConnectorDB.getConnection();
     private static CallableStatement cstmt;
 
     private static final String SQL_INSERT = "INSERT INTO role_ (ID, NAME) VALUES (?,?)";
-    private static final String SQL_SELECT_ALL = "select id, name from role_";
-
-    static {
-        try {
-            connection = ConnectorDB.getConnection();
-        } catch (SQLException e) {
-            log.error("Ошибка при подключении к БД: " + e.getMessage());
-        }
-    }
+    private static final String SQL_SELECT_ALL = "SELECT ID, NAME FROM role_";
 
     /**
      * Запись новой роли, с установлением нового соединения к БД
@@ -67,7 +59,7 @@ public class RoleDAO {
             try {
                 cstmt.close();
             } catch (SQLException e) {
-                log.error(e.getMessage());
+                log.error("Ошибка при закрытии подключения к БД: " + e.getMessage());
             }
         }
         return false;
@@ -89,7 +81,7 @@ public class RoleDAO {
             try {
                 connection.close();
             } catch (SQLException e) {
-                log.error(e.getMessage());
+                log.error("Ошибка при закрытии подключения к БД: " + e.getMessage());
             }
         }
         return new ArrayList<>();
@@ -104,11 +96,12 @@ public class RoleDAO {
         List<Role> roles = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(SQL_SELECT_ALL);  //Используется для извлечения данных (SELECT)
+            ResultSet rs = statement.executeQuery(SQL_SELECT_ALL);
             while (rs.next()) {
-                Role role = new Role();
-                role.setId((UUID) rs.getObject("id"));
-                role.setName(rs.getString("name"));
+                Role role = new Role(
+                        (UUID) rs.getObject("id"),
+                        rs.getString("name")
+                );
                 roles.add(role);
             }
             rs.close();
@@ -117,5 +110,4 @@ public class RoleDAO {
         }
         return roles;
     }
-
 }

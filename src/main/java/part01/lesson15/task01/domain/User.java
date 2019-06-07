@@ -1,6 +1,9 @@
 package part01.lesson15.task01.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -10,20 +13,19 @@ import java.util.UUID;
  * @author    Pavel Anisimov
  */
 public class User {
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     private String name;
     private Date birthday;
     private UUID login_id;
     private String city;
     private String email;
     private String description;
-    private Role role;
+    private List<Role> role = new ArrayList<>();
 
     public User() {
     }
 
-    public User(String name, Date birthday, UUID login_id, String city, String email, String description, Role role) {
-        this.id = UUID.randomUUID();
+    public User(String name, Date birthday, UUID login_id, String city, String email, String description, List<Role> role) {
         this.name = name;
         this.birthday = birthday;
         this.login_id = login_id;
@@ -89,11 +91,31 @@ public class User {
         this.description = description;
     }
 
-    public Role getRole() {
+    public List<Role> getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(List<Role> role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(birthday, user.birthday) &&
+                Objects.equals(login_id, user.login_id) &&
+                Objects.equals(city, user.city) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(description, user.description) &&
+                Objects.equals(role, user.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, birthday, login_id, city, email, description, role);
     }
 }

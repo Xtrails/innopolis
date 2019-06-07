@@ -7,7 +7,9 @@ import part01.lesson15.task01.dao.UserDAO;
 import part01.lesson15.task01.domain.Role;
 import part01.lesson15.task01.domain.User;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,11 +43,12 @@ public class Main {
     private static Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-//        Role role = new Role("new_role");
-//        RoleDAO.insert(role);
+
+        // 2) Через jdbc интерфейс сделать запись данных(INSERT) в таблицу
+        Role role = new Role("new_role");
+        RoleDAO.insert(role);
 
         List<Role> roles = RoleDAO.getRoles();
-
         User user = new User(
                 "name",
                 new Date(321453L),
@@ -53,9 +56,35 @@ public class Main {
                 "Ижевск",
                 "anisimov.prod@gmail.com",
                 "Заметка",
-                roles.get(0)
+                roles
         );
 
+        //a) Используя параметризированный запрос
         UserDAO.insert(user);
+
+        user.setId(UUID.randomUUID());
+
+        //b) Используя batch процесс
+        UserDAO.insertBatch(user);
+
+        //3) Сделать параметризированную выборку по login_ID и name одновременно
+        UserDAO.getByLoginIdAndName(user.getLogin_id(),user.getName());
+
+        //4) Перевести connection в ручное управление транзакциями
+        Connection connection = null;
+        try {
+            connection = ConnectorDB.getConnection();
+            connection.setAutoCommit(false);
+            connection.setSavepoint("a");
+            UserDAO.insert(user, connection);
+            UserDAO.insert(user, connection);
+        } catch (Exception e) {
+            try {
+                connection.rollback();
+                connection.close();
+            } catch (SQLException ex) {
+                log.error(e.getMessage());
+            }
+        }
     }
 }
