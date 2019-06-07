@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Задание 15.
+ * Задание 13.
  *
  * 1) Спроектировать базу
  *      - Таблица USER содержит поля id, name, birthday, login_ID, city, email, description
